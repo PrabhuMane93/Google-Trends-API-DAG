@@ -48,7 +48,7 @@ def taskflow():
     def checker():
         now = datetime.now()
         a=0
-        Google_Trends = pd.read_csv('E:\Internship\Phoenixgen\Dataloader\Google Trends\Google_Trends.csv')
+        Google_Trends = pd.read_csv('Google_Trends.csv')
         for b in Google_Trends['Date']:
             if b == now.strftime("%d/%m/%Y"):
                 a=a+1
@@ -61,7 +61,7 @@ def taskflow():
     @task
     def update_dataset():
         check = checker()
-        Google_Trends = pd.read_csv('E:\Internship\Phoenixgen\Dataloader\Google Trends\Google_Trends.csv')
+        Google_Trends = pd.read_csv('Google_Trends.csv')
         if (check!=0):
             str1 = 'You have already extracted data today for '
             str2 = keyword[0]
@@ -74,7 +74,7 @@ def taskflow():
                 Google_Trends.loc[len(Google_Trends.index)] = [keyword[0], now.strftime("%d/%m/%Y"), trends(region[j])[0], region[j]]
                 j=j+1
         print(Google_Trends)
-        Google_Trends.to_csv('E:\Internship\Phoenixgen\Dataloader\Google Trends\Google_Trends.csv', index=False)
+        Google_Trends.to_csv('Google_Trends.csv', index=False)
 
     """Summoning the Functions and Outputing the Dataframe"""
     update_dataset()
